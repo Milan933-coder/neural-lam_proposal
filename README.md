@@ -1,19 +1,19 @@
-# GSoC Proposal: Merge `prob_model_global` And `prob_model_lam` Into The Current `neural-lam` Hierarchy
+# Merge Plan: `prob_model_global` And `prob_model-lam` Into The `New_hirearchy branch` Hierarchy
 
 ## Scope
 
-This document is now written against the **current repo hierarchy** in:
+This document is now written against the `New_hirearchy branch` hierarchy:
 
-- `d:\Agentic AI Projects\neural-lam`
+- `New_hirearchy branch`
 
-The earlier folders are treated as donor branches that must merge **into this hierarchy**, not replace it:
+The earlier folders are treated as donor branches that must merge into this hierarchy, not replace it:
 
-- `D:\neural-lam` on branch `prob_model_global`
-- `D:\neural-lam-2\neural-lam` on branch `prob_model_lam`
+- `prob_model_global`
+- `prob_model-lam`
 
 ## Current Target Hierarchy Read For This Proposal
 
-I based this final merge plan on the current repo files below:
+I based this final merge plan on the current target branch files below:
 
 - `README.md`
 - `neural_lam/config.py`
@@ -39,19 +39,19 @@ I based this final merge plan on the current repo files below:
 
 ## Executive Summary
 
-The right final destination is the **current repository structure**.
+The right final destination is the `New_hirearchy branch` structure.
 
 The old probabilistic branches should not be merged by copying their top-level layout. Instead:
 
-1. Keep the current package hierarchy in `d:\Agentic AI Projects\neural-lam`.
+1. Keep the current package hierarchy in `New_hirearchy branch`.
 2. Port the shared probabilistic model files into `neural_lam/models/`.
 3. Add the global data path as a new datastore lane under `neural_lam/datastore/`.
 4. Extend the existing training path built around `StepPredictor`, `ARForecaster`, and `ForecasterModule`.
-5. Keep graph generation, plotting, tests, and CLI centered on the files that already exist in this repo.
+5. Keep graph generation, plotting, tests, and CLI centered on the files that already exist in this branch.
 
 ## Why This Current Hierarchy Is The Correct Final Landing
 
-The current repo already has the right abstractions:
+The `New_hirearchy branch` already has the right abstractions:
 
 - `neural_lam/config.py` provides config-driven execution
 - `neural_lam/datastore/base.py` already supports `is_forecast` and `is_ensemble`
@@ -81,7 +81,7 @@ These files are the main reusable probabilistic contribution from both donor bra
 
 ### Global-specific donor logic
 
-From `D:\neural-lam`, the final repo mainly needs:
+From `prob_model_global`, the final repo mainly needs:
 
 - global ERA5 data handling from `neural_lam/era5_dataset.py`
 - forecast export ideas from `neural_lam/forecast_to_xarr.py`
@@ -90,7 +90,7 @@ From `D:\neural-lam`, the final repo mainly needs:
 
 ### LAM-specific donor logic
 
-From `D:\neural-lam-2\neural-lam`, the final repo mainly needs:
+From `prob_model-lam`, the final repo mainly needs:
 
 - the probabilistic LAM model path
 - existing MEPS assumptions as reference for compatibility
@@ -99,9 +99,9 @@ From `D:\neural-lam-2\neural-lam`, the final repo mainly needs:
 
 ## Final Merge Principle
 
-The earlier branches should merge into this repo using three rules:
+The earlier branches should merge into this branch using three rules:
 
-### Rule 1: Keep the current repo structure
+### Rule 1: Keep the current branch structure
 
 Keep these current files and directories as the permanent skeleton:
 
@@ -125,106 +125,106 @@ Because `BaseDatastore` and `WeatherDataset` already support forecast and ensemb
 
 ### A. Existing current files to keep as-is structurally
 
-- `d:\Agentic AI Projects\neural-lam\neural_lam\config.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\create_graph.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\weather_dataset.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\train_model.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\metrics.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\vis.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\step_predictor.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\ar_forecaster.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\forecaster.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\forecaster_module.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\graph_lam.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\hi_lam.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\hi_lam_parallel.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\datastore\__init__.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\datastore\base.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\datastore\mdp.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\datastore\npyfilesmeps\store.py`
-- `d:\Agentic AI Projects\neural-lam\tests\test_prediction_model_classes.py`
-- `d:\Agentic AI Projects\neural-lam\tests\test_training.py`
-- `d:\Agentic AI Projects\neural-lam\tests\test_graph_creation.py`
+- `New_hirearchy branch/neural_lam/config.py`
+- `New_hirearchy branch/neural_lam/create_graph.py`
+- `New_hirearchy branch/neural_lam/weather_dataset.py`
+- `New_hirearchy branch/neural_lam/train_model.py`
+- `New_hirearchy branch/neural_lam/metrics.py`
+- `New_hirearchy branch/neural_lam/vis.py`
+- `New_hirearchy branch/neural_lam/models/step_predictor.py`
+- `New_hirearchy branch/neural_lam/models/ar_forecaster.py`
+- `New_hirearchy branch/neural_lam/models/forecaster.py`
+- `New_hirearchy branch/neural_lam/models/forecaster_module.py`
+- `New_hirearchy branch/neural_lam/models/graph_lam.py`
+- `New_hirearchy branch/neural_lam/models/hi_lam.py`
+- `New_hirearchy branch/neural_lam/models/hi_lam_parallel.py`
+- `New_hirearchy branch/neural_lam/datastore/__init__.py`
+- `New_hirearchy branch/neural_lam/datastore/base.py`
+- `New_hirearchy branch/neural_lam/datastore/mdp.py`
+- `New_hirearchy branch/neural_lam/datastore/npyfilesmeps/store.py`
+- `New_hirearchy branch/tests/test_prediction_model_classes.py`
+- `New_hirearchy branch/tests/test_training.py`
+- `New_hirearchy branch/tests/test_graph_creation.py`
 
-### B. New files to add into this repo
+### B. New files to add into this branch
 
 ### Shared probabilistic model files
 
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\graph_efm.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\base_latent_encoder.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\base_graph_latent_decoder.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\constant_latent_encoder.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\graph_latent_encoder.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\graph_latent_decoder.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\hi_graph_latent_encoder.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\hi_graph_latent_decoder.py`
+- `New_hirearchy branch/neural_lam/models/graph_efm.py`
+- `New_hirearchy branch/neural_lam/models/base_latent_encoder.py`
+- `New_hirearchy branch/neural_lam/models/base_graph_latent_decoder.py`
+- `New_hirearchy branch/neural_lam/models/constant_latent_encoder.py`
+- `New_hirearchy branch/neural_lam/models/graph_latent_encoder.py`
+- `New_hirearchy branch/neural_lam/models/graph_latent_decoder.py`
+- `New_hirearchy branch/neural_lam/models/hi_graph_latent_encoder.py`
+- `New_hirearchy branch/neural_lam/models/hi_graph_latent_decoder.py`
 
 ### Global datastore lane
 
 The cleanest final landing here is inferred from the current datastore layout:
 
-- `d:\Agentic AI Projects\neural-lam\neural_lam\datastore\era5\__init__.py` (inferred)
-- `d:\Agentic AI Projects\neural-lam\neural_lam\datastore\era5\config.py` (inferred)
-- `d:\Agentic AI Projects\neural-lam\neural_lam\datastore\era5\store.py` (inferred)
+- `New_hirearchy branch/neural_lam/datastore/era5/__init__.py` (inferred)
+- `New_hirearchy branch/neural_lam/datastore/era5/config.py` (inferred)
+- `New_hirearchy branch/neural_lam/datastore/era5/store.py` (inferred)
 
 ### Optional utility if forecast export stays standalone
 
-- `d:\Agentic AI Projects\neural-lam\neural_lam\forecast_to_xarr.py`
+- `New_hirearchy branch/neural_lam/forecast_to_xarr.py`
 
 ### C. Current files to extend
 
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\__init__.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\train_model.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\forecaster_module.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\models\ar_forecaster.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\metrics.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\vis.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\create_graph.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\plot_graph.py`
-- `d:\Agentic AI Projects\neural-lam\neural_lam\datastore\__init__.py`
-- `d:\Agentic AI Projects\neural-lam\tests\test_prediction_model_classes.py`
-- `d:\Agentic AI Projects\neural-lam\tests\test_training.py`
-- `d:\Agentic AI Projects\neural-lam\tests\test_graph_creation.py`
-- `d:\Agentic AI Projects\neural-lam\tests\test_datasets.py`
-- `d:\Agentic AI Projects\neural-lam\tests\test_datastores.py`
+- `New_hirearchy branch/neural_lam/models/__init__.py`
+- `New_hirearchy branch/neural_lam/train_model.py`
+- `New_hirearchy branch/neural_lam/models/forecaster_module.py`
+- `New_hirearchy branch/neural_lam/models/ar_forecaster.py`
+- `New_hirearchy branch/neural_lam/metrics.py`
+- `New_hirearchy branch/neural_lam/vis.py`
+- `New_hirearchy branch/neural_lam/create_graph.py`
+- `New_hirearchy branch/neural_lam/plot_graph.py`
+- `New_hirearchy branch/neural_lam/datastore/__init__.py`
+- `New_hirearchy branch/tests/test_prediction_model_classes.py`
+- `New_hirearchy branch/tests/test_training.py`
+- `New_hirearchy branch/tests/test_graph_creation.py`
+- `New_hirearchy branch/tests/test_datasets.py`
+- `New_hirearchy branch/tests/test_datastores.py`
 
 ### D. Donor files that should stay reference-only
 
-These older files are useful as sources, but they should not become the final main structure in this repo:
+These older files are useful as sources, but they should not become the final main structure in this branch:
 
-- `D:\neural-lam\train_model.py`
-- `D:\neural-lam-2\neural-lam\train_model.py`
-- `D:\neural-lam\create_global_mesh.py`
-- `D:\neural-lam-2\neural-lam\create_mesh.py`
-- `D:\neural-lam\create_global_grid_features.py`
-- `D:\neural-lam-2\neural-lam\create_grid_features.py`
-- `D:\neural-lam\create_global_forcing.py`
-- `D:\neural-lam-2\neural-lam\create_parameter_weights.py`
-- `D:\neural-lam\neural_lam\era5_dataset.py`
-- `D:\neural-lam-2\neural-lam\neural_lam\weather_dataset.py`
-- `D:\neural-lam\neural_lam\models\ar_model.py`
-- `D:\neural-lam-2\neural-lam\neural_lam\models\ar_model.py`
+- `prob_model_global/train_model.py`
+- `prob_model-lam/train_model.py`
+- `prob_model_global/create_global_mesh.py`
+- `prob_model-lam/create_mesh.py`
+- `prob_model_global/create_global_grid_features.py`
+- `prob_model-lam/create_grid_features.py`
+- `prob_model_global/create_global_forcing.py`
+- `prob_model-lam/create_parameter_weights.py`
+- `prob_model_global/neural_lam/era5_dataset.py`
+- `prob_model-lam/neural_lam/weather_dataset.py`
+- `prob_model_global/neural_lam/models/ar_model.py`
+- `prob_model-lam/neural_lam/models/ar_model.py`
 
 ## Exact Merge Mapping Into The Current Hierarchy
 
-| Donor file | Final landing in this repo |
+| Donor file | Final landing in this branch |
 | --- | --- |
-| `D:\neural-lam\neural_lam\models\graph_efm.py` | `neural_lam/models/graph_efm.py` |
-| `D:\neural-lam\neural_lam\models\graph_latent_encoder.py` | `neural_lam/models/graph_latent_encoder.py` |
-| `D:\neural-lam\neural_lam\models\graph_latent_decoder.py` | `neural_lam/models/graph_latent_decoder.py` |
-| `D:\neural-lam\neural_lam\models\hi_graph_latent_encoder.py` | `neural_lam/models/hi_graph_latent_encoder.py` |
-| `D:\neural-lam\neural_lam\models\hi_graph_latent_decoder.py` | `neural_lam/models/hi_graph_latent_decoder.py` |
-| `D:\neural-lam\neural_lam\models\constant_latent_encoder.py` | `neural_lam/models/constant_latent_encoder.py` |
-| `D:\neural-lam\neural_lam\models\base_latent_encoder.py` | `neural_lam/models/base_latent_encoder.py` |
-| `D:\neural-lam\neural_lam\models\base_graph_latent_decoder.py` | `neural_lam/models/base_graph_latent_decoder.py` |
-| `D:\neural-lam\neural_lam\era5_dataset.py` | `neural_lam/datastore/era5/store.py` (adapted, inferred) |
-| `D:\neural-lam\neural_lam\forecast_to_xarr.py` | `neural_lam/forecast_to_xarr.py` or `neural_lam/datastore/era5/` utility |
-| `D:\neural-lam\create_global_mesh.py` | logic folded into `neural_lam/create_graph.py` |
-| `D:\neural-lam\plot_global_graph.py` | logic folded into `neural_lam/plot_graph.py` |
-| `D:\neural-lam-2\neural-lam\neural_lam\models\graphcast.py` | no new file, aligns with current `neural_lam/models/graph_lam.py` |
-| `D:\neural-lam-2\neural-lam\neural_lam\models\graph_fm.py` | no new file, aligns with current `neural_lam/models/hi_lam.py` |
-| `D:\neural-lam-2\neural-lam\create_mesh.py` | reference for extending `neural_lam/create_graph.py` |
-| `D:\neural-lam-2\neural-lam\plot_graph.py` | reference for extending `neural_lam/plot_graph.py` |
+| `prob_model_global/neural_lam/models/graph_efm.py` | `neural_lam/models/graph_efm.py` |
+| `prob_model_global/neural_lam/models/graph_latent_encoder.py` | `neural_lam/models/graph_latent_encoder.py` |
+| `prob_model_global/neural_lam/models/graph_latent_decoder.py` | `neural_lam/models/graph_latent_decoder.py` |
+| `prob_model_global/neural_lam/models/hi_graph_latent_encoder.py` | `neural_lam/models/hi_graph_latent_encoder.py` |
+| `prob_model_global/neural_lam/models/hi_graph_latent_decoder.py` | `neural_lam/models/hi_graph_latent_decoder.py` |
+| `prob_model_global/neural_lam/models/constant_latent_encoder.py` | `neural_lam/models/constant_latent_encoder.py` |
+| `prob_model_global/neural_lam/models/base_latent_encoder.py` | `neural_lam/models/base_latent_encoder.py` |
+| `prob_model_global/neural_lam/models/base_graph_latent_decoder.py` | `neural_lam/models/base_graph_latent_decoder.py` |
+| `prob_model_global/neural_lam/era5_dataset.py` | `neural_lam/datastore/era5/store.py` (adapted, inferred) |
+| `prob_model_global/neural_lam/forecast_to_xarr.py` | `neural_lam/forecast_to_xarr.py` or `neural_lam/datastore/era5/` utility |
+| `prob_model_global/create_global_mesh.py` | logic folded into `neural_lam/create_graph.py` |
+| `prob_model_global/plot_global_graph.py` | logic folded into `neural_lam/plot_graph.py` |
+| `prob_model-lam/neural_lam/models/graphcast.py` | no new file, aligns with current `neural_lam/models/graph_lam.py` |
+| `prob_model-lam/neural_lam/models/graph_fm.py` | no new file, aligns with current `neural_lam/models/hi_lam.py` |
+| `prob_model-lam/create_mesh.py` | reference for extending `neural_lam/create_graph.py` |
+| `prob_model-lam/plot_graph.py` | reference for extending `neural_lam/plot_graph.py` |
 
 ## Diagram: Donor Branches Into Current Repo
 
@@ -235,12 +235,12 @@ flowchart LR
     era5_dataset.py
     create_global_mesh.py"] --> C["Port shared models + global datastore logic"]
 
-    B["prob_model_lam
+    B["prob_model-lam
     graph_efm.py
     create_mesh.py
     MEPS conventions"] --> D["Port shared models + keep LAM datastore lane"]
 
-    C --> E["current neural-lam hierarchy"]
+    C --> E["New_hirearchy branch"]
     D --> E
 
     E --> F["config.py"]
@@ -285,5 +285,31 @@ flowchart TD
     M --> N["forecaster_module.py"]
     N --> O["tests/"]
 ```
-My Propsal for issue 49  Will not Create any issue as the CNN Predictor ,ARForecasterSmapler and EnsembleForecasterModule will be separate files we just have to modify the training script or adda separate script to use the files to train
 
+## Four-Week Timeline
+
+### Week 1
+
+- compare `prob_model_global` and `prob_model-lam` model files with the current `New_hirearchy branch`
+- add the shared probabilistic model files under `neural_lam/models/`
+- update `neural_lam/models/__init__.py` so the new model classes are visible in the current hierarchy
+
+### Week 2
+
+- extend `neural_lam/train_model.py` to load the probabilistic model path
+- update `neural_lam/models/ar_forecaster.py` and `neural_lam/models/forecaster_module.py` for probabilistic rollout and loss handling
+- add any metric changes needed in `neural_lam/metrics.py`
+
+### Week 3
+
+- add the global ERA5 datastore under `neural_lam/datastore/era5/`
+- register it in `neural_lam/datastore/__init__.py`
+- extend `neural_lam/create_graph.py` and `neural_lam/plot_graph.py` so global graph generation fits the same branch structure
+
+### Week 4
+
+- add and update tests for models, datastore loading, dataset slicing, training, and graph creation
+- run integration checks to make sure deterministic LAM, probabilistic LAM, and global paths work inside one hierarchy
+- do final cleanup of documentation and merge notes
+
+My Propsal for issue 49  Will not Create any issue as the CNN Predictor ,ARForecasterSmapler and EnsembleForecasterModule will be separate files we just have to modify the training script or adda separate script to use the files to train
